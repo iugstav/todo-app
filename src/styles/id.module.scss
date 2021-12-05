@@ -1,0 +1,158 @@
+.projectPageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  .mainTodoContent {
+    width: 60%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .intro {
+      width: 100%;
+      height: 50px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .name {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+
+        font-size: 1.8rem;
+        color: #1a1a1a;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+
+        .previousPageButton {
+          width: 45px;
+          height: 45px;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background: #d2dcec;
+          border-radius: 0.5rem;
+
+          transition: 0.2s all;
+
+          span {
+            margin-right: 0.1em;
+          }
+
+          &:hover {
+            background: #4285f4;
+          }
+        }
+      }
+
+      .deleteButton {
+        width: 45px;
+        height: 45px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+
+        transition: 0.2s all;
+
+        &:hover {
+          background: #4285f4;
+        }
+      }
+    }
+
+    .addTodo {
+      width: 500px;
+      height: 44px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .todoInput {
+        width: 92%;
+        height: 100%;
+        background: #f7f7f7;
+
+        font-size: 1.2rem;
+        font-size: 500;
+        padding: 0 0.5rem;
+
+        border-radius: 0.5rem 0 0 0.5rem;
+
+        &::placeholder {
+          color: #969696;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .buttonAddTodo {
+        background: #4285f4;
+        width: 44px;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
+    }
+
+    .todoBox {
+      width: 100%;
+      height: 70%;
+
+      .todoList {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+        list-style: none;
+      }
+
+      .ifEmpty {
+      }
+    }
+
+    .emptyTasks {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.modalBodyText {
+  font: 400 1rem 'Roboto', sans-serif;
+
+  p {
+    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+}

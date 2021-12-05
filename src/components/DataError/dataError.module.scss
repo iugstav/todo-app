@@ -1,0 +1,17 @@
+.ifEmpty {
+  height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    font: 400 20px 'Roboto', sans-serif;
+    color: #afafaf;
+  }
+
+  .emptyText {
+    text-align: center;
+  }
+}

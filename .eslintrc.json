@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "arrow-parens": "warn",
+    "require-await": "warn",
+    "arrow-spacing": "warn",
+    "comma-dangle": "off",
+    "jsx-quotes": "warn"
+  }
+}

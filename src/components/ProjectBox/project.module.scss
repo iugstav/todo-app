@@ -1,0 +1,40 @@
+.projectBox {
+  width: 220px;
+  height: 100px;
+  background: #ebebeb;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 1em;
+
+  transition: 0.2s all;
+
+  .dataWrapper {
+    width: 80%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .projectName {
+    font: 500 20px 'Roboto', sans-serif;
+    padding: 0 0 4px 0;
+  }
+  .numberOfTasks {
+    font: 400 16px 'Roboto', sans-serif;
+    color: #2e2e2e;
+  }
+
+  &:hover {
+    filter: brightness(0.9);
+    width: 225px;
+    height: 105px;
+
+    cursor: pointer;
+  }
+}

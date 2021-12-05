@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id   String @id @default(uuid())
+  name String @unique
+
+  tasks Todo[]
+
+  @@map("projects")
+}
+
+model Todo {
+  id        String  @id @default(uuid())
+  name      String
+  completed Boolean @default(false)
+
+  Project      Project? @relation(fields: [project_name], references: [name], onDelete: Cascade)
+  project_name String?
+
+  @@map("todos")
+}

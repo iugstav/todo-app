@@ -1,0 +1,61 @@
+.todo {
+  display: block;
+  width: 100%;
+  height: 44px;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  border: 3px solid #e1dfdf;
+  border-radius: 0.6rem;
+
+  transition: 0.1s all;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    width: 90%;
+    height: 100%;
+
+    .todoCheckbox {
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-right: 0.5rem;
+
+      .text {
+        font-size: 1.2rem;
+        font-size: 500;
+        text-overflow: ellipsis;
+
+        transition: 0.2s all;
+      }
+    }
+  }
+
+  &:hover {
+    background: #f1f1f1;
+    border-color: #f1f1f1;
+  }
+}
+
+.completed {
+  background-color: #4285f4;
+  border-color: #4285f4;
+  .text {
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: #4285f4;
+    border-color: #4285f4;
+  }
+}
