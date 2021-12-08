@@ -1,0 +1,221 @@
+.loginAuth {
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+
+  .illustration {
+    flex: 8;
+    background: linear-gradient(179.76deg, #4f42e7 44.98%, #b64dc7 126.47%);
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 120px 80px;
+
+    strong {
+      font: 700 2rem 'Inter', sans-serif;
+      line-height: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      font: 400 1.3rem 'Inter', sans-serif;
+      line-height: 2rem;
+      margin-top: 1rem;
+    }
+  }
+
+  .mainContent {
+    flex: 7;
+    padding: 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+
+    width: 100%;
+
+    .signUpFormWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+
+      width: 100%;
+      max-width: 60%;
+
+      .formIntro {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        h2 {
+          font: 700 2rem 'Roboto', sans-serif;
+        }
+      }
+
+      .signUp {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        label {
+          font: 500 1rem 'Roboto', sans-serif;
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    .signInFormWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+
+      width: 100%;
+      max-width: 60%;
+
+      .formIntro {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        h2 {
+          font: 700 2rem 'Roboto', sans-serif;
+        }
+      }
+
+      .logIn {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        label {
+          font: 500 1rem 'Roboto', sans-serif;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
+
+.googleButton {
+  width: 90%;
+  height: 42px;
+  margin: 40px auto 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #1a1a1a;
+  font: 500 1rem 'Roboto', sans-serif;
+  border-radius: 8px;
+  border: 2px solid #a8a8b3;
+  background: none;
+
+  transition: 0.2s all;
+
+  &:hover {
+    border-color: #7e7e86;
+  }
+}
+
+.signUpFormInput {
+  width: 100%;
+  height: 40px;
+  border: 2px solid #a8a8b3;
+  border-radius: 8px;
+
+  font-size: 1.1rem;
+  padding: 0 8px;
+  margin-bottom: 1rem;
+
+  transition: 0.2s all;
+
+  &:focus {
+    outline: none;
+    border-color: #7e7e86;
+  }
+
+  &::placeholder {
+    color: #a8a8b3;
+  }
+}
+
+.separator {
+  font-size: 14px;
+  color: #a8a8b3;
+
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #a8a8b3;
+    margin-right: 16px;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #a8a8b3;
+    margin-left: 16px;
+  }
+}
+
+.submitAuthForm {
+  width: 90%;
+  height: 42px;
+  margin: 24px auto 8px;
+  background-color: #4f42e7;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+
+  color: #fff;
+  font: 500 1rem 'Roboto', sans-serif;
+  border-radius: 8px;
+
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.switchAuthMethod {
+  color: #a8a8b3;
+  margin: 0 auto;
+  font: 400 1rem 'Roboto', sans-serif;
+
+  .fakeLink {
+    color: #4f42e7;
+    border-bottom: 2px solid #4f42e7;
+    display: inline-block;
+    line-height: 0.9;
+    cursor: pointer;
+
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.7);
+    }
+  }
+}
