@@ -1,10 +1,14 @@
 import Head from 'next/head'
+import { AppProps } from 'next/app'
+import { SWRConfig } from 'swr'
+import { SessionProvider } from 'next-auth/react'
+
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../chakraUtils'
 
 import '../styles/global.scss'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -19,7 +23,7 @@ function MyApp({ Component, pageProps }) {
           crossOrigin="true"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
         <link
@@ -29,9 +33,13 @@ function MyApp({ Component, pageProps }) {
         />
         <title>noteMe</title>
       </Head>
-      <ChakraProvider resetCSS theme={theme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <SessionProvider session={pageProps.session}>
+        <SWRConfig value={{ provider: () => new Map() }}>
+          <ChakraProvider resetCSS theme={theme}>
+            <Component {...pageProps} />
+          </ChakraProvider>
+        </SWRConfig>
+      </SessionProvider>
     </>
   )
 }
