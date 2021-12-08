@@ -1,9 +1,12 @@
-import Router, { useRouter } from 'next/router'
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
-import { Todo } from '../components/Todo'
-import useSWR from 'swr'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
+import useSWR, { unstable_serialize } from 'swr'
 import { useSWRConfig } from 'swr'
 import api from '../services/api'
+
+import { Todo } from '../components/Todo'
+import { DataError } from '../components/DataError'
 
 import { GrPrevious } from 'react-icons/gr'
 import { MdDelete, MdOutlineAdd } from 'react-icons/md'
@@ -20,18 +23,19 @@ import {
 } from '@chakra-ui/react'
 
 import styles from '../styles/id.module.scss'
-import { DataError } from '../components/DataError'
 
 const fetcher = (url: string) => api.get(url).then((res) => res.data)
 
 export default function ProjectPage() {
   let todoRegEx: RegExp = /^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/gm
-
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { data: session, status } = useSession({
+    required: true,
+  })
 
   const router = useRouter()
   const { id } = router.query
-
   const [todoName, setTodoName] = useState<string>('')
 
   const {
@@ -39,20 +43,12 @@ export default function ProjectPage() {
     error,
     mutate,
   } = useSWR<Todo[]>(`/project/${id}`, fetcher)
-  const { mutate: mutateTodo } = useSWRConfig()
+  const { mutate: mutateTodo, cache } = useSWRConfig()
 
-  const toggleComplete: ToggleComplete = (name) => {
-    console.log(name)
-  }
+  const toggleComplete: ToggleComplete = (name) => {}
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTodoName(e.target.value)
-  }
-
-  const handleDeleteProject = async () => {
-    await api.post<Project>(`/delete/${id}`, { projectName: id }).then(() => {
-      router.push('/')
-    })
   }
 
   const handleSubmit = useCallback(
@@ -71,12 +67,20 @@ export default function ProjectPage() {
     [todoName, todoData, mutate]
   )
 
-  const handleDeleteTodo = async (todo: string, id: string) => {
-    await api.post<Todo>(`/delete/todo/${todo}`, { todo: id }).then((res) => {
-      const response = res.data as Todo
-      Router.reload()
+  const handleDeleteProject = async () => {
+    await api.post<Project>(`/delete/${id}`, { projectName: id }).then(() => {
+      router.push('/')
+    })
+  }
 
-      //TODO: ajustar pra não ter que dar reload nas rotas
+  const handleDeleteTodo = async (todo: string, id: string) => {
+    await api.post<Todo>(`/delete/todo/${todo}`, { todo: id }).then(() => {
+      if (cache instanceof Map) {
+        const cachedTodo = cache.get(
+          unstable_serialize(`/project${router.asPath}`)
+        )
+        mutate(cachedTodo)
+      }
     })
   }
 

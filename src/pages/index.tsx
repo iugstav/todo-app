@@ -1,6 +1,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react'
-import useSWR, { useSWRConfig } from 'swr'
+import useSWR from 'swr'
 import api from '../services/api'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { MdOutlineChecklist, MdOutlineAdd } from 'react-icons/md'
 import { ProjectBox } from '../components/ProjectBox'
@@ -14,6 +15,10 @@ function Index() {
   const [projectName, setProjectName] = useState<string>('')
 
   const { data, error, mutate } = useSWR<Project[]>('/project', fetcher)
+
+  const { data: session, status } = useSession({
+    required: true,
+  })
 
   const handleSubmit = useCallback(
     (e: FormEvent) => {
