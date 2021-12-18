@@ -13,16 +13,16 @@ export function ProjectBox(props: Project) {
   )
 
   return (
-    <Link href={`/${props.name}`}>
-      <div className={styles.projectBox}>
+    <Link href={`/${props.name}`} passHref>
+      <a className={styles.projectBox}>
         <div className={styles.dataWrapper}>
           <p className={styles.projectName}> {props.name} </p>
           <p className={styles.numberOfTasks}>
             {' '}
-            {error ? 0 : !todoData ? 0 : todoData.length} tarefas{' '}
+            {error ? 'erro' : !todoData ? 0 : todoData.length} tarefas{' '}
           </p>
         </div>
-      </div>
+      </a>
     </Link>
   )
 }

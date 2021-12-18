@@ -1,3 +1,7 @@
+import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
+import api from '../../services/api'
+import useSWR from 'swr'
 import { Checkbox } from '@chakra-ui/checkbox'
 import {
   AlertDialog,
@@ -9,9 +13,7 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
-import { GoKebabHorizontal } from 'react-icons/go'
-import { MdEdit, MdDelete } from 'react-icons/md'
+import { FiTrash2 } from 'react-icons/fi'
 
 import styles from './todo.module.scss'
 
@@ -25,21 +27,20 @@ export function Todo({ todo, toggleComplete, handleDelete }: TodoProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
 
-  const [isChecked, setIsChecked] = useState<boolean>(false)
-
   const handleCheckbox = () => {
-    setIsChecked((prevState) => !prevState)
-    toggleComplete
+    toggleComplete(todo)
   }
 
   return (
-    <li className={`${styles.todo} ${isChecked ? styles.completed : ''}`}>
+    <li className={`${styles.todo} ${todo.completed ? styles.completed : ''}`}>
       <div className={styles.wrapper}>
         <div className={styles.todoCheckbox}>
           <Checkbox
             onChange={handleCheckbox}
+            isChecked={todo.completed}
             size="lg"
-            borderColor="#4285f4"
+            borderColor="purple.400"
+            colorScheme="purple"
             marginLeft="0.8rem"
             spacing="1rem"
             iconColor="#ffffff"
@@ -51,14 +52,15 @@ export function Todo({ todo, toggleComplete, handleDelete }: TodoProps) {
         </div>
       </div>
 
-      <button>
-        <MdDelete size="24px" onClick={onOpen} />
+      <button className={styles.deleteTodoButton} onClick={onOpen}>
+        <FiTrash2 size="24px" className={styles.deleteTodoIcon} />
       </button>
 
       <AlertDialog
         isOpen={isOpen}
         onClose={onClose}
         leastDestructiveRef={cancelRef}
+        size="sm"
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
