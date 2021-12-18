@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useState } from 'react'
+import { FormEvent, useCallback, useState } from 'react'
 import useSWR from 'swr'
 import api from '../services/api'
 import { useSession } from 'next-auth/react'
@@ -8,11 +8,13 @@ import { ProjectBox } from '../components/ProjectBox'
 import { DataError } from '../components/DataError'
 
 import styles from '../styles/indexPage.module.scss'
+import { useRouter } from 'next/router'
 
 const fetcher = (url: string) => api.get(url).then((res) => res.data)
 
 function Index() {
   const [projectName, setProjectName] = useState<string>('')
+  const router = useRouter()
 
   const { data, error, mutate } = useSWR<Project[]>('/project', fetcher)
 
@@ -24,13 +26,15 @@ function Index() {
     (e: FormEvent) => {
       e.preventDefault()
 
-      api
-        .post<Project>('/project', { projectName: projectName })
-        .then((res) => {
-          const response = res.data as Project
-          mutate([...data, response], false)
-          setProjectName('')
-        })
+      if (projectName.trim() !== '') {
+        api
+          .post<Project>('/project', { projectName: projectName })
+          .then((res) => {
+            const response = res.data as Project
+            mutate([...data, response], false)
+            setProjectName('')
+          })
+      }
     },
     [projectName, data, mutate]
   )
@@ -41,20 +45,21 @@ function Index() {
         <form className={styles.formWrapper} onSubmit={handleSubmit}>
           <div className={styles.input}>
             <span>
-              <MdOutlineChecklist size="24px" />
+              <MdOutlineChecklist size="24px" color="#a8a8b3" />
             </span>
             <input
               required
               type="text"
               name="projectName"
+              autoComplete="off"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               placeholder="Digite o nome do projeto"
             />
           </div>
 
-          <button type="submit">
-            <MdOutlineAdd size="24px" /> Criar
+          <button type="submit" className={styles.createProject}>
+            <MdOutlineAdd size="24px" /> <span>Criar</span>
           </button>
         </form>
 
@@ -74,6 +79,8 @@ function Index() {
                   width={220}
                   height={220}
                   className={styles.undraw}
+                  alt="Adicione Projetos"
+                  priority
                 />
               </div>
               <div className={styles.emptyText}>

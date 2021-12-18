@@ -4,7 +4,7 @@ import { SWRConfig } from 'swr'
 import { SessionProvider } from 'next-auth/react'
 
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from '../chakraUtils'
+import theme from '../utils/chakraUtils'
 
 import '../styles/global.scss'
 
@@ -15,6 +15,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Gustavo Soares" />
+        <meta
+          name="description"
+          content="Um site para guardar todas as suas tarefas e otimizar sua rotina"
+        />
+        <meta name="keywords" content="noteme, tarefas, todo, to-do" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
