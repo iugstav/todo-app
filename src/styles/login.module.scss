@@ -4,7 +4,8 @@
   height: 100vh;
 
   .illustration {
-    flex: 8;
+    width: 57%;
+    height: 100%;
     background: linear-gradient(179.76deg, #4f42e7 44.98%, #b64dc7 126.47%);
     color: #fff;
 
@@ -28,15 +29,13 @@
   }
 
   .mainContent {
-    flex: 7;
-    padding: 0 32px;
+    width: 43%;
+    height: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
     color: #1a1a1a;
-
-    width: 100%;
 
     .signUpFormWrapper {
       display: flex;
@@ -45,7 +44,7 @@
       text-align: center;
 
       width: 100%;
-      max-width: 60%;
+      max-width: 400px;
 
       .formIntro {
         width: 100%;
@@ -65,6 +64,10 @@
         align-items: flex-start;
 
         label {
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+
           font: 500 1rem 'Roboto', sans-serif;
           margin-bottom: 4px;
         }
@@ -107,7 +110,7 @@
 }
 
 .googleButton {
-  width: 90%;
+  width: 25em;
   height: 42px;
   margin: 40px auto 0;
   cursor: pointer;
@@ -216,6 +219,134 @@
 
     &:hover {
       filter: brightness(0.7);
+    }
+  }
+}
+
+@media screen and (max-width: 1101px) {
+  .loginAuth {
+    .illustration {
+      width: 45%;
+    }
+    .mainContent {
+      width: 55%;
+    }
+  }
+}
+
+@media only screen and (min-width: 881px) and (max-height: 1367px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+  .loginAuth {
+    flex-direction: column-reverse;
+    background-color: #934dc7;
+
+    .illustration {
+      width: 100%;
+      height: 25%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .illustrationImage {
+        width: 260px;
+        height: 180px;
+      }
+
+      strong,
+      p {
+        display: none;
+      }
+    }
+    .mainContent {
+      width: 100%;
+      height: 75%;
+      background-color: #fff;
+
+      align-items: flex-start;
+
+      border-radius: 4rem 4rem 0 0;
+
+      .signUpFormWrapper {
+        margin-top: 4em;
+        justify-content: center;
+      }
+    }
+  }
+  .googleButton {
+    width: 30em;
+    margin-left: -28px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .loginAuth {
+    flex-direction: column-reverse;
+    background-color: #934dc7;
+
+    .illustration {
+      width: 100%;
+      height: 25%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .illustrationImage {
+        width: 260px;
+        height: 180px;
+      }
+
+      strong,
+      p {
+        display: none;
+      }
+    }
+    .mainContent {
+      width: 100%;
+      height: 75%;
+      background-color: #fff;
+
+      align-items: flex-start;
+
+      border-radius: 4rem 4rem 0 0;
+
+      .signUpFormWrapper {
+        margin-top: 4em;
+      }
+    }
+  }
+}
+
+//Iphone X
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) {
+  .loginAuth {
+    .illustration {
+      .illustrationImage {
+        width: 240px;
+        height: 160px;
+      }
+    }
+  }
+}
+
+@media screen and (max-device-width: 374px) {
+  .loginAuth {
+    .illustration {
+      .illustrationImage {
+        width: 235px;
+        height: 155px;
+      }
+    }
+
+    .mainContent {
+      border-radius: 3rem 3rem 0 0;
+
+      .signUpFormWrapper {
+        margin-top: 3rem;
+      }
+    }
+    .googleButton {
+      width: 80%;
     }
   }
 }
