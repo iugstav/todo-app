@@ -4,7 +4,7 @@ import { SWRConfig } from 'swr'
 import { SessionProvider } from 'next-auth/react'
 
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from '../utils/chakraUtils'
+import theme from '../chakraUtils'
 
 import '../styles/global.scss'
 
