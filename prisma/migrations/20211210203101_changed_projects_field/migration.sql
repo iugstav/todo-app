@@ -1,6 +1,3 @@
--- AlterTable
-ALTER TABLE "projects" ADD COLUMN     "userId" TEXT;
-
 -- CreateTable
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
@@ -49,6 +46,25 @@ CREATE TABLE "VerificationToken" (
     "expires" TIMESTAMP(3) NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "projects" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "userEmail" TEXT,
+
+    CONSTRAINT "projects_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "todos" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "project_name" TEXT,
+
+    CONSTRAINT "todos_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
@@ -64,6 +80,9 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "projects_name_key" ON "projects"("name");
+
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -71,4 +90,7 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "projects" ADD CONSTRAINT "projects_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "projects" ADD CONSTRAINT "projects_userEmail_fkey" FOREIGN KEY ("userEmail") REFERENCES "User"("email") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "todos" ADD CONSTRAINT "todos_project_name_fkey" FOREIGN KEY ("project_name") REFERENCES "projects"("name") ON DELETE CASCADE ON UPDATE CASCADE;

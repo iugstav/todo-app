@@ -47,7 +47,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  projects      Project[]
+  Project       Project[]
 }
 
 model VerificationToken {
@@ -59,20 +59,22 @@ model VerificationToken {
 }
 
 model Project {
-  id   String @id @default(uuid())
-  name String @unique
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
 
   tasks Todo[]
 
+  User      User?   @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  userEmail String?
   @@map("projects")
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
 }
 
 model Todo {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  completed Boolean @default(false)
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
 
   Project      Project? @relation(fields: [project_name], references: [name], onDelete: Cascade)
   project_name String?
