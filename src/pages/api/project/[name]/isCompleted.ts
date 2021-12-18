@@ -18,29 +18,7 @@ export default async function handler(
             Project: {
               name: name as string,
             },
-          },
-          orderBy: {
-            createdAt: 'asc',
-          },
-        })
-
-        res.status(200).json(result)
-      } catch (error) {
-        res.status(400).json(error)
-      }
-    }
-
-    if (req.method === 'POST') {
-      try {
-        const { taskName } = req.body
-
-        const result = await prisma.todo.create({
-          data: {
-            name: taskName,
-
-            Project: {
-              connect: { name: name as string },
-            },
+            completed: true,
           },
         })
 
