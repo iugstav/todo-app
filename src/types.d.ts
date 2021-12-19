@@ -7,7 +7,8 @@ type Project = {
 type Todo = {
   id: string
   name: string
-  isCompleted: boolean
+  completed: boolean
+  createdAt: Date
 }
 
 type ToggleComplete = (selectedTodo: Todo) => void
