@@ -2,7 +2,8 @@ import Image from 'next/image'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import { FiUserPlus } from 'react-icons/fi'
-import { FcGoogle } from 'react-icons/fc'
+import { VscGithubInverted } from 'react-icons/vsc'
+import { FaFacebook } from 'react-icons/fa'
 import { MdLogin } from 'react-icons/md'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { Tooltip } from '@chakra-ui/tooltip'
@@ -35,6 +36,7 @@ export default function authPage() {
             <h2>Bem-vindo!</h2>
           </header>
 
+<<<<<<< HEAD
           <button
             className={styles.googleButton}
             onClick={() =>
@@ -45,6 +47,38 @@ export default function authPage() {
           >
             <FcGoogle size="1.7rem" /> Cadastre-se com o Google
           </button>
+=======
+          <div className={styles.socialButtonsWrapper}>
+            <button
+              className={styles.googleButton}
+              onClick={() =>
+                signIn('facebook', {
+                  callbackUrl:
+                    process.env.NODE_ENV === 'development'
+                      ? 'http://localhost:3000/'
+                      : process.env.NEXT_PUBLIC_REDIRECT_URL,
+                })
+              }
+            >
+              <FaFacebook color="#2374E1" size="1.6rem" /> Cadastre-se com o
+              Facebook
+            </button>
+            <button
+              className={styles.googleButton}
+              onClick={() =>
+                signIn('github', {
+                  callbackUrl:
+                    process.env.NODE_ENV === 'development'
+                      ? 'http://localhost:3000/'
+                      : process.env.NEXT_PUBLIC_REDIRECT_URL,
+                })
+              }
+            >
+              <VscGithubInverted color="#2D333B" size="1.6rem" /> Cadastre-se
+              com o Github
+            </button>
+          </div>
+>>>>>>> dev
         </div>
 
         {/* {!hasAccount ? (

@@ -11,6 +11,6 @@ type Todo = {
   createdAt: Date
 }
 
-type ToggleComplete = (todo: Todo) => void
+type ToggleComplete = (selectedTodo: Todo) => void
 
 type Add = (newTodo: string) => void
