@@ -39,7 +39,7 @@ export default function authPage() {
             className={styles.googleButton}
             onClick={() =>
               signIn('google', {
-                callbackUrl: 'http://localhost:3000/',
+                callbackUrl: 'https://noteme.vercel.app/',
               })
             }
           >
