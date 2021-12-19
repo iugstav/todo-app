@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 import { AppProps } from 'next/app'
 import { SWRConfig } from 'swr'
 import { SessionProvider } from 'next-auth/react'
