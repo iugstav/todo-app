@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import { FiUserPlus } from 'react-icons/fi'
-import { FcGoogle } from 'react-icons/fc'
+import { VscGithubInverted } from 'react-icons/vsc'
 import { MdLogin } from 'react-icons/md'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { Tooltip } from '@chakra-ui/tooltip'
@@ -38,12 +38,12 @@ export default function authPage() {
           <button
             className={styles.googleButton}
             onClick={() =>
-              signIn('google', {
+              signIn('github', {
                 callbackUrl: 'http://localhost:3000/',
               })
             }
           >
-            <FcGoogle size="1.7rem" /> Cadastre-se com o Google
+            <VscGithubInverted size="1.7rem" /> Cadastre-se com o Github
           </button>
         </div>
 
