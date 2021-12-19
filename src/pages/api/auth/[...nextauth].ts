@@ -8,11 +8,6 @@ import prisma from '../../../config/prisma'
 export default nextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-<<<<<<< HEAD
-    GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
-=======
     GithubProvider({
       clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET,
@@ -21,7 +16,6 @@ export default nextAuth({
     FacebookProvider({
       clientId: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_SECRET,
->>>>>>> dev
     }),
 
     EmailProvider({
