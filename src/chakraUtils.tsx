@@ -10,11 +10,6 @@ const breakpoints = createBreakpoints({
 
 const theme = extendTheme({
   breakpoints,
-  colors: {
-    purple: {
-      400: '#4f42e7',
-    },
-  },
   styles: {
     global: {
       body: {
