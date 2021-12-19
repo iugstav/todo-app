@@ -36,18 +36,6 @@ export default function authPage() {
             <h2>Bem-vindo!</h2>
           </header>
 
-<<<<<<< HEAD
-          <button
-            className={styles.googleButton}
-            onClick={() =>
-              signIn('google', {
-                callbackUrl: 'https://noteme.vercel.app/',
-              })
-            }
-          >
-            <FcGoogle size="1.7rem" /> Cadastre-se com o Google
-          </button>
-=======
           <div className={styles.socialButtonsWrapper}>
             <button
               className={styles.googleButton}
@@ -78,7 +66,6 @@ export default function authPage() {
               com o Github
             </button>
           </div>
->>>>>>> dev
         </div>
 
         {/* {!hasAccount ? (
