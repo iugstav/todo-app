@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
 import { ChangeEvent, FormEvent, useCallback, useRef, useState } from 'react'
 import useSWR, { unstable_serialize } from 'swr'
 import { useSWRConfig } from 'swr'
@@ -37,12 +36,6 @@ export default function ProjectPage() {
   let todoRegEx: RegExp = /^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/gm
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
-
-  //verify oAuth session
-  //TODO: transformar em um componente || contexto
-  const { data: session, status } = useSession({
-    required: true,
-  })
 
   const router = useRouter()
   const { id } = router.query
@@ -98,6 +91,7 @@ export default function ProjectPage() {
         return
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [todoName, pendingTodoData, mutate]
   )
 

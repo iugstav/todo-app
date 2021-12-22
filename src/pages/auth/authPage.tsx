@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import { signIn } from 'next-auth/react'
+import { useAuth } from '../../contexts/AuthContext'
 import { useState } from 'react'
 import { FiUserPlus } from 'react-icons/fi'
-import { VscGithubInverted } from 'react-icons/vsc'
+import { FcGoogle } from 'react-icons/fc'
 import { FaFacebook } from 'react-icons/fa'
 import { MdLogin } from 'react-icons/md'
 import { BsQuestionCircleFill } from 'react-icons/bs'
@@ -10,11 +10,13 @@ import { Tooltip } from '@chakra-ui/tooltip'
 
 import styles from '../../styles/login.module.scss'
 
-export default function authPage() {
+export default function AuthPage() {
   let userNameReGexp: RegExp =
     /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/gm
   let emailRegexp: RegExp =
     /([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])/gm
+
+  const { signInWithGoogle } = useAuth()
 
   const [hasAccount, setHasAccount] = useState<boolean>(false)
   const [userName, setUserName] = useState<string>('')
@@ -32,12 +34,20 @@ export default function authPage() {
       <main className={styles.mainContent}>
         <div className={styles.signUpFormWrapper}>
           <header className={styles.formIntro}>
-            <Image src="/assets/noteme-form.svg" width={45} height={57} />
+            <Image
+              src="/assets/noteme-form.svg"
+              width={45}
+              height={57}
+              alt="Ícone do site"
+            />
             <h2>Bem-vindo!</h2>
           </header>
 
           <div className={styles.socialButtonsWrapper}>
-            <button
+            <button className={styles.googleButton} onClick={signInWithGoogle}>
+              <FcGoogle size="1.6rem" /> Cadastre-se com o Google
+            </button>
+            {/* <button
               className={styles.googleButton}
               onClick={() =>
                 signIn('facebook', {
@@ -50,21 +60,7 @@ export default function authPage() {
             >
               <FaFacebook color="#2374E1" size="1.6rem" /> Cadastre-se com o
               Facebook
-            </button>
-            <button
-              className={styles.googleButton}
-              onClick={() =>
-                signIn('github', {
-                  callbackUrl:
-                    process.env.NODE_ENV === 'development'
-                      ? 'http://localhost:3000/'
-                      : process.env.NEXT_PUBLIC_REDIRECT_URL,
-                })
-              }
-            >
-              <VscGithubInverted color="#2D333B" size="1.6rem" /> Cadastre-se
-              com o Github
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -210,6 +206,7 @@ export default function authPage() {
             height={360}
             layout="responsive"
             sizes="100vw"
+            alt="Anotação de tarefas num computador"
             priority
           />
         </div>

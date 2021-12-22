@@ -1,6 +1,5 @@
 import prisma from '../../../../config/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,49 +7,43 @@ export default async function handler(
 ) {
   const { name } = req.query
 
-  const session = await getSession({ req })
-
-  if (session) {
-    if (req.method === 'GET') {
-      try {
-        const result = await prisma.todo.findMany({
-          where: {
-            Project: {
-              name: name as string,
-            },
+  if (req.method === 'GET') {
+    try {
+      const result = await prisma.todo.findMany({
+        where: {
+          Project: {
+            name: name as string,
           },
-          orderBy: {
-            createdAt: 'asc',
-          },
-        })
+        },
+        orderBy: {
+          createdAt: 'asc',
+        },
+      })
 
-        res.status(200).json(result)
-      } catch (error) {
-        res.status(400).json(error)
-      }
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(400).json(error)
     }
+  }
 
-    if (req.method === 'POST') {
-      try {
-        const { taskName } = req.body
+  if (req.method === 'POST') {
+    try {
+      const { taskName } = req.body
 
-        const result = await prisma.todo.create({
-          data: {
-            name: taskName,
+      const result = await prisma.todo.create({
+        data: {
+          name: taskName,
 
-            Project: {
-              connect: { name: name as string },
-            },
+          Project: {
+            connect: { name: name as string },
           },
-        })
+        },
+      })
 
-        res.status(200).json(result)
-      } catch (error) {
-        res.status(400).json(error)
-      }
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(400).json(error)
     }
-  } else {
-    return res.status(401).json({ message: 'Não autorizado a acessar' })
   }
 
   res.end()

@@ -167,6 +167,22 @@
           }
         }
       }
+
+      .projectsDiv {
+        .ifEmpty {
+          height: 270px;
+          .undrawWrapper {
+            width: 70%;
+            height: 70%;
+          }
+
+          .emptyText {
+            p {
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
     }
   }
 }
